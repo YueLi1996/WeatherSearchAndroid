@@ -1,0 +1,136 @@
+package com.my.viewpagedemo;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+
+public class CircleIndicatorView extends View {
+
+    public CircleIndicatorView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    private int gap = 50;//各个横向排列的小球间距
+
+    public void setCirlceGap(int gap) {
+        this.gap = padding;
+    }
+
+    public int getCirlceGap() {
+        return gap;
+    }
+
+    private int padding = 10;
+
+    public void setPadding(int padding) {
+        this.padding = padding;
+    }
+
+    public int getPadding() {
+        return padding;
+    }
+
+    private int circle_normal_radius = 15; //普通小球半径
+
+    public void setNormalCircleRadius(int radius) {
+        this.circle_normal_radius = radius;
+    }
+
+    public int getNormalCircleRadius() {
+        return circle_normal_radius;
+    }
+
+    private int circle_selected_radius = 15; //被选择的小球半径
+
+    public void setSelectedCircleRadius(int radius) {
+        this.circle_selected_radius = radius;
+    }
+
+    public int getSelectedCircleRadius() {
+        return circle_selected_radius;
+    }
+
+    private int count = 0;
+
+    public void setCircleCount(int count) {
+        this.count = count;
+    }
+
+    public int getCircleCount() {
+        return count;
+    }
+
+    private int pos = 0;
+
+    public void setCircleSelectedPosition(int pos) {
+        this.pos = pos;
+    }
+
+    public int getCircleSelectedPosition() {
+        return pos;
+    }
+
+    public void drawCircleView() {
+        this.invalidate();
+    }
+
+    private int circleSelectedColor = Color.WHITE;
+
+    public void setCircleSelectedColor(int color) {
+        circleSelectedColor = color;
+    }
+
+    public int getCircleSelectedColor() {
+        return circleSelectedColor;
+    }
+
+    private int circleUnSelectedColor = Color.GRAY;
+
+    public void setCircleUnSelectedColor(int color) {
+        circleUnSelectedColor = color;
+    }
+
+    public int getCircleUnSelectedColor() {
+        return circleUnSelectedColor;
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        Paint p = new Paint();
+        p.setAntiAlias(true);
+
+        int w = this.getWidth();
+        int h = this.getHeight();
+
+        //因为是自右往左绘制小圆圈，需要转化pos的位置。
+        int translate_pos = getCircleCount() - getCircleSelectedPosition() - 1;
+
+        //如果居中绘制则使用start_x，但需要依次递加x坐标轴位置值。
+        int start_x = (w+30 + (getCirlceGap() * (getCircleCount() - 1))) / 2;
+//        int start_x = w / 2;
+        System.out.println("start x value = " + start_x + "x: = "+ w + "couting = " + getCircleCount());
+        for (int i = 0; i < getCircleCount(); i++) {
+            int r = getNormalCircleRadius();
+            System.out.println("translate pos: = " + translate_pos);
+            start_x= start_x - 50;
+            if (i == translate_pos) {
+                r = getSelectedCircleRadius();
+                p.setColor(getCircleSelectedColor());
+            } else {
+                r = getNormalCircleRadius();
+                p.setColor(getCircleUnSelectedColor());
+            }
+
+            //自右向左绘制。从最右边往左边绘制小球
+            //如果从该自定制的View左边绘制，直接将 x=0即可。
+            canvas.drawCircle(start_x, h / 2, r, p);
+        }
+    }
+}
