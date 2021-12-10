@@ -30,6 +30,12 @@ Some ideas on improvement
 
 Here are some walkthrough of implemented user stories:
 
-<img src='' title='Video Walkthrough' width='' alt='' />
+<img src='https://github.com/YueLi1996/WeatherSearchAndroid/blob/main/splashscreen.gif' alt='' />
+<img src='https://github.com/YueLi1996/WeatherSearchAndroid/blob/main/detials.gif' alt='' />
+<img src='https://github.com/YueLi1996/WeatherSearchAndroid/blob/main/twitterinfo.gif' alt='' />
+<img src='https://github.com/YueLi1996/WeatherSearchAndroid/blob/main/search.gif' alt='' />
+<img src='https://github.com/YueLi1996/WeatherSearchAndroid/blob/main/addremovefav.gif' alt='' />
+
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
